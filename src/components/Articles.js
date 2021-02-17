@@ -10,8 +10,13 @@ class Articles extends React.Component {
     };
   }
 
+  onChange = (e) => {
+    this.setState({ authorName: e.target.value });
+  };
   fetchArticles = () => {
-    fetch(`https://jsonmock.hackerrank.com/api/articles?author=saintamh&page=1`)
+    fetch(
+      `https://jsonmock.hackerrank.com/api/articles?author=${this.state.authorName}&page=1`
+    )
       .then((res) => res.json())
       .then((json) => {
         let arr = [];
@@ -35,6 +40,7 @@ class Articles extends React.Component {
               className="text-input"
               data-testid="text-input"
               name="authorName"
+              onChange={this.onChange}
             />
             <button
               className="fetch-button"
@@ -45,17 +51,21 @@ class Articles extends React.Component {
             </button>
           </div>
         </div>
-        {this.state.articlesList.length > 0
-          ? this.state.articlesList.map((el, i) => {
-              return (
-                <div key={i} className="results">
-                  <li key="example-key" data-testid="result-row">
-                    {el.title}
-                  </li>
-                </div>
-              );
-            })
-          : null}
+        {this.state.articlesList.length > 0 ? (
+          this.state.articlesList.slice(0, 3).map((el, i) => {
+            return (
+              <div key={i} className="results">
+                <li key="example-key" data-testid="result-row">
+                  {el.title}
+                </li>
+              </div>
+            );
+          })
+        ) : this.state.firstRequest ? (
+          <div data-testid="no-results">No results</div>
+        ) : (
+          ""
+        )}
       </React.Fragment>
     );
   }
