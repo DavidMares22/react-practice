@@ -26,6 +26,14 @@ class App extends Component {
     counters[index].value++;
     this.setState({ counters });
   };
+  
+  decrementHandler = (counter) => {
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index] = { ...counter };
+    counters[index].value--;
+    this.setState({ counters });
+  };
 
   resetHandler = () => {
     const counters = this.state.counters.map((c) => {
@@ -44,6 +52,7 @@ class App extends Component {
           <Counters
             onReset={this.resetHandler}
             onIncrement={this.incrementHandler}
+            onDecrement={this.decrementHandler}
             onDelete={this.deleteHandler}
             counters={this.state.counters}
           />
