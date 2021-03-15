@@ -7,43 +7,48 @@ class Movies extends Component {
   };
 
   handleDelete = (movie) => {
-      console.log(movie);
+    console.log(movie);
+    const movies = this.state.movies.filter((m) => m._id !== movie._id);
+    this.setState({ movies });
   };
 
   render() {
+    const{ length: count} = this.state.movies;
+
+    if (count === 0)
+      return <p>There are no movies in the database.</p>;
     return (
       <React.Fragment>
-        {this.state.movies.length === 0 ? (
-          <h2>No movies to display</h2>
-        ) : (
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Genre</th>
-                <th>Rate</th>
-                <th>Delete</th>
+        <p>Showing {count} movies in the database.</p>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Genre</th>
+              <th>Stock</th>
+              <th>Rate</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.movies.map((movie) => (
+              <tr key={movie._id}>
+                <td>{movie.title}</td>
+                <td>{movie.genre.name}</td>
+                <td>{movie.numberInStock}</td>
+                <td>{movie.dailyRentalRate}</td>
+                <td>
+                  <button
+                    onClick={() => this.handleDelete(movie)}
+                    className="btn btn-danger"
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {this.state.movies.map((movie) => (
-                <tr key={movie._id}>
-                  <td>{movie.title}</td>
-                  <td>{movie.genre.name}</td>
-                  <td>{movie.dailyRentalRate}</td>
-                  <td>
-                    <button
-                      onClick={() => this.handleDelete(movie)}
-                      className="btn btn-danger"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        )}
+            ))}
+          </tbody>
+        </table>
       </React.Fragment>
     );
   }
