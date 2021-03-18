@@ -11,6 +11,42 @@ const movies = [
     like: false
   },
   {
+    _id: "gvnzew4eh6d87v3",
+    title: "Terminator 1",
+    genre: { _id: "5b21ca3eeb7f6fbccd471818", name: "Action" },
+    numberInStock: 6,
+    dailyRentalRate: 2.5,
+    publishDate: "2018-01-03T19:04:28.809Z",
+    like: false
+  },
+  {
+    _id: "gvnzew4eh6d87v4",
+    title: "Terminator 2",
+    genre: { _id: "5b21ca3eeb7f6fbccd471818", name: "Action" },
+    numberInStock: 6,
+    dailyRentalRate: 2.5,
+    publishDate: "2018-01-03T19:04:28.809Z",
+    like: false
+  },
+  {
+    _id: "gvnzew4eh6d87v5",
+    title: "Terminator 3",
+    genre: { _id: "5b21ca3eeb7f6fbccd471818", name: "Action" },
+    numberInStock: 6,
+    dailyRentalRate: 2.5,
+    publishDate: "2018-01-03T19:04:28.809Z",
+    like: false
+  },
+  {
+    _id: "gvnzew4eh6d87v",
+    title: "Terminator 4",
+    genre: { _id: "5b21ca3eeb7f6fbccd471818", name: "Action" },
+    numberInStock: 6,
+    dailyRentalRate: 2.5,
+    publishDate: "2018-01-03T19:04:28.809Z",
+    like: false
+  },
+  {
     _id: "stur65r8bokh9g",
     title: "Die Hard",
     genre: { _id: "5b21ca3eeb7f6fbccd471818", name: "Action" },
