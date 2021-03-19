@@ -25,7 +25,7 @@ class Movies extends Component {
   }
 
   handleDelete = (movie) => {
-    console.log(movie);
+    // console.log(movie);
     const movies = this.state.movies.filter((m) => m._id !== movie._id);
 
     this.setState({ movies });
@@ -38,10 +38,7 @@ class Movies extends Component {
     this.setState({ movies });
   };
 
-  handleEmptyPage = () => {
-     
-      this.setState({ currentPage: this.state.currentPage-- });
-  };
+ 
 
   handleGenreSelect = (genre) => {
     this.setState({ selectedGenre: genre, currentPage: 1 });
@@ -51,14 +48,7 @@ class Movies extends Component {
     this.setState({ currentPage: page });
   };
 
-  handleSort = (path) => {
-    const sortColumn = { ...this.state.sortColumn };
-    if (sortColumn.path === path)
-      sortColumn.order = sortColumn.order === "asc" ? "desc" : "asc";
-    else {
-      sortColumn.path = path;
-      sortColumn.order = "asc";
-    }
+  handleSort = (sortColumn) => {
     this.setState({ sortColumn });
   };
 
@@ -83,6 +73,7 @@ class Movies extends Component {
 
     const movies = paginate(sorted, currentPage, pageSize);
 
+    
     return (
       <div className="row">
         <div className="col-3">
@@ -96,6 +87,7 @@ class Movies extends Component {
           <p>Showing {filtered.length} movies in the database.</p>
           <MoviesTable
             movies={movies}
+            sortColumn={sortColumn}
             onDelete={this.handleDelete}
             onLike={this.handleLike}
             onSort={this.handleSort}
@@ -105,7 +97,6 @@ class Movies extends Component {
             pageSize={pageSize}
             currentPage={currentPage}
             onPageChange={this.handlePageChange}
-            onEmptyPage={this.handleEmptyPage}
           />
         </div>
       </div>

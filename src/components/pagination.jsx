@@ -8,17 +8,13 @@ const Pagination = (props) => {
     pageSize,
     currentPage,
     onPageChange,
-    onEmptyPage,
+   
   } = props;
 
   const pagesCount = Math.ceil(itemsCount / pageSize);
 
-  if ( currentPage > 1  &&  (itemsCount === (currentPage - 1) * pageSize)) {
-    onEmptyPage();
-  }
   if (pagesCount === 1) return null;
   const pages = _.range(1, pagesCount + 1);
-
 
   return (
     <nav>
