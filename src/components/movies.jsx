@@ -27,7 +27,10 @@ class Movies extends Component {
   handleDelete = (movie) => {
     // console.log(movie);
     const movies = this.state.movies.filter((m) => m._id !== movie._id);
-
+    // console.log(movies.length);
+    if (movies.length === (this.state.currentPage - 1) * this.state.pageSize) {
+      this.setState({ currentPage: this.state.currentPage - 1 });
+    }
     this.setState({ movies });
   };
 
@@ -67,6 +70,7 @@ class Movies extends Component {
     const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
     const movies = paginate(sorted, currentPage, pageSize);
+    // console.log(movies);
 
     return { totalCount: filtered.length, data: movies };
   };
