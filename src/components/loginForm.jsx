@@ -58,6 +58,7 @@ class LoginForm extends Component {
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
           <Input
+            focus = {true}
             value={account.username}
             onChange={this.handleChange}
             id="username"
