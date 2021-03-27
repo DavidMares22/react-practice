@@ -1,10 +1,11 @@
-import React, { Component } from "react";
-import Input from "./input";
-import Joi from "joi-browser";
+import React  from "react";
 
-class LoginForm extends Component {
+import Joi from "joi-browser";
+import Form from "./form";
+
+class LoginForm extends Form {
   state = {
-    account: { username: "", password: "" },
+    data: { username: "", password: "" },
     errors: {},
   };
 
@@ -13,76 +14,21 @@ class LoginForm extends Component {
     password: Joi.string().required().label("Password").trim(),
   };
 
-  validate = () => {
-    const result = Joi.validate(this.state.account, this.schema, {
-      abortEarly: false,
-    });
-    if (!result.error) return null;
-
-    const errors = {};
-    for (let item of result.error.details) {
-      errors[item.path[0]] = item.message;
-    }
-
-    return errors;
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const errors = this.validate();
-    this.setState({ errors: errors || {} });
-
-    if (errors) return;
-  };
-
-  validateProperty = ({ name, value }) => {
-    const obj = { [name]: value };
-    const schema = { [name]: this.schema[name] };
-    const { error } = Joi.validate(obj, schema);
-    return error ? error.details[0].message : null;
-  };
-
-  handleChange = ({ currentTarget: input }) => {
-    const errors = { ...this.state.errors };
-    const errorMessage = this.validateProperty(input);
-    if (errorMessage) {
-      errors[input.name] = errorMessage;
-    } else {
-      delete errors[input.name];
-    }
-
-    const account = { ...this.state.account };
-    account[input.name] = input.value;
-    this.setState({ account, errors });
+  doSubmit = () => {
+    // call the server
+    console.log("submitted");
   };
 
   render() {
-    const { account, errors } = this.state;
+    
     return (
       <div>
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
-          <Input
-            focus={true}
-            value={account.username}
-            onChange={this.handleChange}
-            id="username"
-            label="Username"
-            name="username"
-            error={errors.username}
-          />
-          <Input
-            value={account.password}
-            onChange={this.handleChange}
-            id="password"
-            label="Password"
-            name="password"
-            error={errors.password}
-          />
+          {this.renderInput("username", "Username", true)}
+          {this.renderInput("password", "Password",false, "password")}
 
-          <button className="btn btn-primary" disabled={this.validate()}>
-            Login
-          </button>
+          {this.renderButton("Login")}
         </form>
       </div>
     );
