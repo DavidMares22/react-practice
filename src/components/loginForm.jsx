@@ -9,8 +9,8 @@ class LoginForm extends Component {
   };
 
   schema = {
-    username: Joi.string().required().label("Username"),
-    password: Joi.string().required().label("Password"),
+    username: Joi.string().required().label("Username").trim(),
+    password: Joi.string().required().label("Password").trim(),
   };
 
   validate = () => {
@@ -80,7 +80,9 @@ class LoginForm extends Component {
             error={errors.password}
           />
 
-          <button className="btn btn-primary">Login</button>
+          <button className="btn btn-primary" disabled={this.validate()}>
+            Login
+          </button>
         </form>
       </div>
     );
