@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getMovies } from "../services/fakeMovieService";
+import { getMovies, deleteMovie } from "../services/fakeMovieService";
 
 import ListGroup from "./listGroup";
 import Pagination from "./pagination";
@@ -28,6 +28,9 @@ class Movies extends Component {
   handleDelete = (movie) => {
     // console.log(movie);
     const movies = this.state.movies.filter((m) => m._id !== movie._id);
+
+    deleteMovie(movie._id);
+
     // console.log(movies.length);
     if (movies.length === (this.state.currentPage - 1) * this.state.pageSize) {
       this.setState({ currentPage: this.state.currentPage - 1 });
