@@ -2,22 +2,32 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./App.css";
 
+const apiEndpoint = "https://jsonplaceholder.typicode.com/posts";
+
 class App extends Component {
   state = {
     posts: [],
   };
 
   async componentDidMount() {
-    const { data: posts } = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
-    );
+    const { data: posts } = await axios.get(apiEndpoint);
     this.setState({ posts });
   }
+
+  handleAdd = async () => {
+    const obj = { title: "a", body: "b" };
+    const { data: post } = await axios.post(apiEndpoint, obj);
+    post.id = Date.now().toString();
+    const posts = [post, ...this.state.posts];
+    this.setState({ posts });
+  };
 
   render() {
     return (
       <main className="container">
-        <button className="btn btn-primary">Add</button>
+        <button className="btn btn-primary" onClick={this.handleAdd}>
+          Add
+        </button>
         {this.state.posts && (
           <table className="table">
             <thead>
