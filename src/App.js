@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import {ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
 import http from "./services/httpService";
 import config from './config.json'
 import "./App.css";
@@ -61,6 +64,7 @@ class App extends Component {
   render() {
     return (
       <main className="container">
+        <ToastContainer />
         <button className="btn btn-primary" onClick={this.handleAdd}>
           Add
         </button>
