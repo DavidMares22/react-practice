@@ -22,6 +22,15 @@ class App extends Component {
     this.setState({ posts });
   };
 
+  handleUpdate = async (post) => {
+    post.title = "UPDATED";
+    await axios.put(`${apiEndpoint}/${post.id}`, post);
+    const posts = [...this.state.posts];
+    const index = posts.indexOf(post)
+    posts[index] = {...post}
+    this.setState({ posts });
+  };
+
   render() {
     return (
       <main className="container">
@@ -45,7 +54,12 @@ class App extends Component {
                     <th scope="row">{p.id}</th>
                     <td>{p.title}</td>
                     <td>
-                      <button className="btn btn-info">Update</button>
+                      <button
+                        className="btn btn-info"
+                        onClick={() => this.handleUpdate(p)}
+                      >
+                        Update
+                      </button>
                     </td>
                     <td>
                       <button className="btn btn-danger">Delete</button>
