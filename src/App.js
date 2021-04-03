@@ -12,6 +12,7 @@ import NotFound from "./components/notFound";
 import Rentals from "./components/rentals";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
+import Logout from './components/logout';
 
 class App extends Component {
   state = {};
@@ -36,6 +37,7 @@ class App extends Component {
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />
             <Route path="/login" component={LoginForm} />
+            <Route path="/logout" component={Logout} />
             <Route path="/register" component={RegisterForm} />
             <Route path="/not-found" component={NotFound} />
             <Redirect from="/" exact to="/movies" />
