@@ -13,6 +13,7 @@ import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
 import Logout from "./components/logout";
 import { getCurrentUser } from "./services/authService";
+import ProtectedRoute from "./components/protectedRoute";
 
 class App extends Component {
   state = {};
@@ -29,13 +30,7 @@ class App extends Component {
         <Navbar user={user} />
         <main className="container">
           <Switch>
-            <Route
-              path="/movies/:id"
-              render={(props) => {
-                if (!user) return <Redirect to="/login" />;
-                return <MovieForm {...props} />;
-              }}
-            />
+            <ProtectedRoute path="/movies/:id" component={MovieForm} />
 
             <Route
               path="/movies"
